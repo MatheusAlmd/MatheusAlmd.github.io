@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Matheus Almeida — Portfólio</title>
+    <meta name="description"
+        content="Portfólio minimalista de Matheus Almeida, Programador focado em Cybersegurança e Desenvolvimento Web." />
+    <meta name="theme-color" content="#0b0b0c" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2338BDF8'/%3E%3Cstop offset='1' stop-color='%23A78BFA'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M32 6l18 8v12c0 13-7.5 24.7-18 30-10.5-5.3-18-17-18-30V14l18-8z' fill='url(%23g)'/%3E%3Cpath d='M24 28a8 8 0 0 1 16 0v4h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H22a2 2 0 0 1-2-2V34a2 2 0 0 1 2-2h2v-4zm4 4h8v-4a4 4 0 0 0-8 0v4z' fill='%230b0b0c'/%3E%3C/svg%3E" />
+    <style>
+        :root {
+            --bg: #0b0b0c;
+            --elev: #111113;
+            --text: #eaeaea;
+            --muted: #a1a1aa;
+            --edge: #1c1c21;
+            --radius: 14px;
+            --max: 780px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            background: var(--bg);
+            font: 400 16px/1.7 Inter, ui-sans-serif, system-ui;
+            text-align: center
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: var(--bg);
+            z-index: 100;
+            transition: opacity .3s ease
+        }
+
+        .blip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #8ab4f8;
+            box-shadow: 0 0 28px rgba(138, 180, 248, .35)
+        }
+
+        .bar {
+            width: 200px;
+            height: 2px;
+            background: var(--edge);
+            border-radius: 999px;
+            overflow: hidden
+        }
+
+        .bar>i {
+            display: block;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #8ab4f8, #b5c8ff)
+        }
+
+        .boot {
+            font: 500 12px/1 ui-monospace, Menlo, Consolas;
+            color: var(--muted)
+        }
+
+        .wrap {
+            max-width: var(--max);
+            margin: auto;
+            padding: 28px 24px
+        }
+
+        /* HERO */
+        .hero {
+            padding: 56px 0 28px
+        }
+
+        .avatar {
+            width: 128px;
+            height: 128px;
+            margin: 0 auto 18px;
+            border-radius: 50%;
+            padding: 2px;
+            background: conic-gradient(from 120deg, #8ab4f8, #6ee7b7, #8ab4f8);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: block;
+            object-fit: cover;
+            background: #0f0f10;
+            border: 2px solid #0f0f10
+        }
+
+        .name {
+            font-size: clamp(28px, 5.5vw, 56px);
+            margin: 0
+        }
+
+        .role {
+            color: #cfcfcf;
+            margin: 8px 0 8px
+        }
+
+        .quote {
+            color: var(--muted);
+            font-style: italic;
+            max-width: 60ch;
+            margin: 0 auto
+        }
+
+        /* SEÇÕES */
+        section {
+            padding: 28px 0;
+            border-top: 1px solid var(--edge)
+        }
+
+        h2 {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: #cfcfcf;
+            margin: 0 0 16px;
+            cursor: pointer
+        }
+
+        .bio {
+            color: var(--muted);
+            margin: 14px auto 0;
+            max-width: 70ch
+        }
+
+        /* Skills */
+        .pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px
+        }
+
+        .pill {
+            font-size: 12px;
+            padding: 6px 10px;
+            border: 1px solid var(--edge);
+            border-radius: 999px;
+            color: #d7d7d7
+        }
+
+        /* Projetos */
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center
+        }
+
+        .item {
+            width: 100%;
+            max-width: 620px;
+            padding: 14px;
+            border: 1px solid var(--edge);
+            border-radius: var(--radius);
+            background: rgba(255, 255, 255, .02);
+            text-align: left
+        }
+
+        .item h3 {
+            margin: 0;
+            font-size: 16px
+        }
+
+        .item p {
+            margin: 6px 0 0;
+            color: var(--muted)
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 13px
+        }
+
+        /* Blur minimal (sem cadeado/overlay) */
+        .proj-wrap {
+            position: relative
+        }
+
+        .proj-wrap.locked #plist {
+            filter: blur(6px) saturate(.8);
+            pointer-events: none;
+            user-select: none
+        }
+
+        /* Contatos (marcas originais) */
+        .contact-icons {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 18px
+        }
+
+        .contact-icons a img {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            display: block
+        }
+
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--edge);
+            color: var(--muted)
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loader">
+        <div class="blip">
+            <div class="dot"></div>
+            <div class="bar"><i id="prog"></i></div>
+            <div class="boot"><span id="bootmsg">booting…</span> <span id="pct">0%</span></div>
+        </div>
+    </div>
+
+    <main class="wrap">
+        <section class="hero" id="inicio">
+            <div class="avatar"><img id="avatar" src="https://api.dicebear.com/7.x/identicon/svg?seed=Matheus"
+                    alt="Foto de perfil de Matheus Almeida" /></div>
+            <h1 class="name">Matheus Almeida</h1>
+            <p class="role">Programador — Cybersegurança & Web</p>
+            <p class="quote">“Podemos ver apenas uma curta distância à frente, mas podemos ver muita coisa que precisa
+                ser feita.” — Alan Turing</p>
+        </section>
+
+        <section id="sobre">
+            <h2>Sobre</h2>
+            <p class="bio">Olá! Sou Matheus Almeida, tenho 23 anos e sou um desenvolvedor apaixonado por tecnologia, com
+                foco especial em cibersegurança e análise de dados. Atualmente curso Ciência da Computação na Anhembi
+                Morumbi, onde aprimoro constantemente meus conhecimentos técnicos.</p>
+            <p class="bio">Minha filosofia é simples: priorizo aprender mais do que tudo. Acredito que o conhecimento é
+                a base para inovação e segurança no mundo digital. Tenho experiência em desenvolvimento web frontend,
+                protocolos de rede e sistemas operacionais, sempre buscando aplicar essas habilidades na criação de
+                soluções seguras e eficientes.</p>
+
+            <div class="pills" id="skills"></div>
+
+            <!-- Ícones de contato já visíveis logo abaixo das skills -->
+            <div class="contact-icons">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=matheusdavi31@gmail.com" target="_blank"
+                    rel="noopener" title="Enviar e‑mail">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"
+                        alt="Gmail" />
+                </a>
+                <a href="https://github.com/MatheusAlmd" target="_blank" rel="noopener" title="GitHub">
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" />
+                </a>
+                <a href="https://www.linkedin.com/in/m4theus4lmeida/" target="_blank" rel="noopener" title="LinkedIn">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                        alt="LinkedIn" />
+                </a>
+                <a href="https://www.instagram.com/matheus_alm_/" target="_blank" rel="noopener" title="Instagram">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+                </a>
+            </div>
+        </section>
+
+        <section id="projetos">
+            <h2>Projetos</h2>
+            <div class="proj-wrap locked" id="projWrap">
+                <div class="list" id="plist"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>© <span id="year"></span> Matheus Almeida — menos é mais (e mais seguro).</footer>
+
+    <script>
+        // Loader fake
+        const loader = document.getElementById('loader'), prog = document.getElementById('prog'), pct = document.getElementById('pct'), bootmsg = document.getElementById('bootmsg');
+        let p = 0; function step() { p = Math.min(100, p + Math.floor(Math.random() * 11)); prog.style.width = p + '%'; pct.textContent = p + '%'; bootmsg.textContent = p < 60 ? 'booting…' : (p < 90 ? 'warming UI…' : 'hardening…'); if (p < 100) { setTimeout(step, 120 + Math.random() * 120) } else { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 320) } } setTimeout(step, 250);
+
+        // Dados
+        const DATA = {
+            photo:  "./avatar-matheus.jpg",
+            skills: ['Windows', 'Linux', 'Web Dev', 'IA automation', 'SQL', 'Git', 'KPIs'],
+            projects: [
+                { title: 'Headers Guard', about: 'Audita e aplica cabeçalhos de segurança.', meta: 'Node.js', url: '#' },
+                { title: 'Honeypot Lite', about: 'Honeypot minimal em VPS com log de IPs.', meta: 'Go + Docker', url: '#' },
+                { title: 'ETL KPIs', about: 'Pipeline simples com métricas e dashboard.', meta: 'Python + SQL', url: '#' }
+            ]
+        };
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+        document.getElementById('avatar').src = DATA.photo;
+
+        // Skills
+        const skills = document.getElementById('skills');
+        DATA.skills.forEach(s => { let span = document.createElement('span'); span.className = 'pill'; span.textContent = s; skills.appendChild(span) });
+
+        // Projetos
+        const plist = document.getElementById('plist');
+        DATA.projects.forEach(p => { let el = document.createElement('article'); el.className = 'item'; el.innerHTML = `<div><h3><a href="${p.url}" target="_blank">${p.title}</a></h3><p>${p.about}</p></div><span class="meta">${p.meta}</span>`; plist.appendChild(el) });
+
+        // Toggle minimal (sem ícone, sem texto). Clique no título "Projetos" apenas.
+        const wrap = document.getElementById('projWrap');
+        const saved = localStorage.getItem('projectsUnlocked');
+        if (saved === '1') { wrap.classList.remove('locked'); }
+        document.querySelector('#projetos h2').addEventListener('click', () => {
+            const locked = wrap.classList.toggle('locked');
+            localStorage.setItem('projectsUnlocked', locked ? '0' : '1');
+        });
+    </script>
+</body>
+
+</html>
